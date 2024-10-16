@@ -1,2 +1,6 @@
 # SoftwareDev1
-group Uni Project creating a web game for unit one of software
+
+Software Devolment one assengment 1,
+Creating the game wordle with html and Java scrip,
+By Michael Franks & Cansin ... 
+

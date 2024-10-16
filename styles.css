@@ -1,6 +1,6 @@
 /* styles.css */
 body {
-  background-color: lightgray;
+  background-color: whitesmoke;
   }
   
 h1 {
@@ -8,10 +8,14 @@ h1 {
   text-align: center;
   }
 
-footer{
+.footer {
+  position: fixed;
+  left:0;
+  bottom: 0;
+  width: 100%;
   background-color: lightgray;  
   padding: 5px;
   text-align:center;
   color: black;
-  
-}
+  }
+
