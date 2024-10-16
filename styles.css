@@ -7,3 +7,11 @@ h1 {
   color: black ;
   text-align: center;
   }
+
+footer{
+  background-color: lightgray;  
+  padding: 5px;
+  text-align:center;
+  color: black;
+  
+}
