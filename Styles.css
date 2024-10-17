@@ -1,0 +1,53 @@
+/* for creating formating parts of html  */
+
+H1{
+    text-align: center;
+    color: black;
+}
+
+h2{
+    text-align: center; 
+}
+
+.Container {
+    width: auto;
+    height: 200px;
+    margin: 50px;
+    outline: solid 1px black;
+    align-self: center;
+}
+
+.game{
+    align-items: center;
+}
+
+.footer {
+    position: fixed ;
+    left:0;
+    bottom: 0;
+    width: 100%;
+    padding: 5px;
+    background-color: whitesmoke;
+    color: gray;
+    text-align: center;
+}
+
+.RightColumn {
+    float: left;
+    width: 65%;
+  }
+
+.LeftColumn {
+    border-color: black;
+    border-left: 10px;
+    float: left;
+    width: 35%;
+  }
+  
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+    border-color: black;
+  }
+
