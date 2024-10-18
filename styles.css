@@ -1,0 +1,37 @@
+/* styles.css */
+body {
+  background-color: whitesmoke;
+  }
+  
+h1 {
+  color: black ;
+  text-align: center;
+  }
+
+.footer {
+  position: fixed;
+  left:0;
+  bottom: 0;
+  width: 100%;
+  background-color: lightgray;  
+  padding: 5px;
+  text-align:center;
+  color: black;
+  }
+
+.RightColumn {
+  float: left;
+  width: 65%;
+}
+
+.LeftColumn {
+  float: left;
+  width: 35%;
+
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
