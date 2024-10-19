@@ -1,13 +1,15 @@
 /* for creating formating parts of html  */
 
-h1, h2, p{
+/* General formatting for text */
+h1, h2, p {
     text-align: center;
     color: black;
 }
 
+/* Footer fixed at the bottom */
 .footer {
-    position: fixed ;
-    left:0;
+    position: fixed;
+    left: 0;
     bottom: 0;
     width: 100%;
     padding: 5px;
@@ -16,30 +18,40 @@ h1, h2, p{
     text-align: center;
 }
 
-.container{
+/* Apply box-sizing to all elements to include padding and borders within element's width */
+* {
+    box-sizing: border-box;
+}
+
+/* game box styling */
+.container {
     border: 1px solid black;
     padding: 20px;
     width: 300px;
     height: 200px;
-    text-align: center; /* Optional: Center content inside the box */
+    margin: 20px auto; 
 }
+
 .RightColumn {
-    float: left;
-    width: 65%;
-    
-  }
+    float: left; 
+    width: 65%;   
+    padding: 20px; 
+    height: auto;
+    background-color: white; 
+}
 
 .LeftColumn {
-    border-color: black;
-    border-left: 10px;
-    float: left;
-    width: 35%;
-  }
+    float: left; 
+    width: 35%;   
+    padding: 20px; 
+    height: auto; 
+    background-color: lightgray;
+}
 
+/* Clearfix for row */
 .row:after {
     content: "";
     display: table;
-    clear: both;
-    border-color: black;
-  }
+    clear: both; /* Clear the float for the columns */
+}
 
