@@ -1,24 +1,8 @@
 /* for creating formating parts of html  */
 
-H1{
+h1, h2, p{
     text-align: center;
     color: black;
-}
-
-h2{
-    text-align: center; 
-}
-
-.Container {
-    width: auto;
-    height: 200px;
-    margin: 50px;
-    outline: solid 1px black;
-    align-self: center;
-}
-
-.game{
-    align-items: center;
 }
 
 .footer {
@@ -32,9 +16,17 @@ h2{
     text-align: center;
 }
 
+.container{
+    border: 1px solid black;
+    padding: 20px;
+    width: 300px;
+    height: 200px;
+    text-align: center; /* Optional: Center content inside the box */
+}
 .RightColumn {
     float: left;
     width: 65%;
+    
   }
 
 .LeftColumn {
@@ -43,7 +35,7 @@ h2{
     float: left;
     width: 35%;
   }
-  
+
 .row:after {
     content: "";
     display: table;
