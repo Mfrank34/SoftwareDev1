@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
-    <head> <!-- imports css % JavaScripe-->
+    <head> 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, inital-scale=1">
         <title>Wordle</title>
+        <!-- Links to external java script -->
         <script src="Script.js"> </script>
         <!-- Link to external CSS file -->
         <link rel="stylesheet" href="Styles.css">
@@ -11,29 +12,29 @@
     <body> <!-- main page -->
         <h1>Wordle Game</h1>
         <hr> <!-- create a line under the heading 1 -->
-        <div class="row">
+        <div class="row"> <!-- right side of colume-->
             <div class = "RightColumn">
                 <!-- column 1 for game -->
-                 <h2> Welcome to Wordle</h2>
-                 <div id="OutPutBox" class="container">
+                <h2> Welcome to Wordle</h2>
+                <p> game box </p>
+                <div id="output" class="container">
                     <!-- output javascript for are program from summit -->
-                    <p>Game Box</p>
-                 </div>
-                <br>
-                <div class="InputBox">
+                </div>
+
+                <div id="input" class="input_box">
                     <!-- User Input section -->
-                    <p>Enter a word:</p>
+                    <label>Enter a word:</label>
                     <input type="text" id = "Word" name="Word">
                     <button type="submit">Submit</button>
                 </div>
                 
-                <div class="..." id="Error">
+                <div id="error" class="container">
                     <!-- for error handeling -->
                     <p> Error box </p>
                 </div>
 
             </div>
-            <div class = "LeftColumn">
+            <div class = "LeftColumn"> <!-- Left side of colume -->
                 <!-- column 2 for leader board -->
                 <h2> Leader Board </h2>
                 <p> this is for a leader board if someone makes it idk tho </p>
@@ -42,7 +43,7 @@
 
         <!-- Sticky footer  -->
         <div class = "footer">
-            <p>by Michael & Cansin | Software Dev 1.</p>
+            <p>By Michael & Cansin | Software Dev 1.</p>
         </div>
     </body>
 </html>
