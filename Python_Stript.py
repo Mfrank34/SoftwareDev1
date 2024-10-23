@@ -17,4 +17,4 @@ consonants_list = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', '
 Word = input("Enter word:")
 vowel_counter(Word)
 
-
+# 
