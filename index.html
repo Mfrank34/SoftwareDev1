@@ -28,16 +28,14 @@
                     <button type="submit">Submit</button>
                 </div>
                 
-                <div id="error" class="Error_Box">
-                    <!-- for error handeling -->
-                    <p style="color: red;"> Error Box </p>
-                </div>
-
+                <!-- for error handeling -->
+                 <p id="error" style="color: red;"> Error Box </p>
             </div>
+
             <div class = "LeftColumn"> <!-- Left side of colume -->
                 <!-- column 2 for leader board -->
                 <h2> Leader Board </h2>
-                <button id="leaderboard_update" Type="button" onclick="update_leaderbod">Update Leaderboard</button>
+                <button id="leaderboard_update" Type="button" onclick="fetchJSONData();">Update Leaderboard</button>
                 <div id="leaderboard" class=""> </div> <!-- michael put the leader board in here-->
             </div>
         </div>
