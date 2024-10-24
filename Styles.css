@@ -47,7 +47,7 @@ h1, h2, p {
 .Error_box {
     border: 1px ;
     padding: 20px;
-    width: 300px;
+    width: 300px auto;
     height: 80px;
     margin: 20px auto; 
     text-align: center;

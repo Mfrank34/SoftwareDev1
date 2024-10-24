@@ -24,22 +24,21 @@
                 <div id="input" class="input_box">
                     <!-- User Input section -->
                     <label>Enter a word:</label>
-                    <input type="text" id = "Word" name="Word">
+                    <input type="text" id = "user_word" name="user_word">
                     <button type="submit">Submit</button>
                 </div>
                 
-                <div id="error" class="error">
+                <div id="error" class="Error_Box">
                     <!-- for error handeling -->
-                    <p> Error Box </p>
+                    <p style="color: red;"> Error Box </p>
                 </div>
 
             </div>
             <div class = "LeftColumn"> <!-- Left side of colume -->
                 <!-- column 2 for leader board -->
                 <h2> Leader Board </h2>
-                <div id="leaderboard" class="">
-                    
-                </div>
+                <button id="leaderboard_update" Type="button" onclick="update_leaderbod">Update Leaderboard</button>
+                <div id="leaderboard" class=""> </div> <!-- michael put the leader board in here-->
             </div>
         </div>
 

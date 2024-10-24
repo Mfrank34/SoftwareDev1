@@ -1,21 +1,35 @@
 # this is for michael indepentent #
 
-# fuctions 
+# imports 
+import json 
 
-def vowel_counter(word : str):
-    for word in Vowels_list:
-        print ("vowel found")
+# leader board function for storying data
 
+def sort(UserData): # sorts the score in order
+    return UserData['score']
 
-# main code calling
+def read(UserData: list , file_path : str):
+    """
+    reads the data from file json type
+    """
+    try:
+        with open(file_path, 'r') as input_file: 
+            UserData += json.load(input_file)
+    except json.decoder.JSONDecodeError:
+        print('no UserData within file')
+    # sort UserData
+    UserData.sort(reverse=True, key=sort)
 
-Wordgen =["apple", "pinapple", "bannana"]
+def update(UserData : list , file_path : str ):
+    """
+    Create / Update json file
+    """
+    # Read UserData from the JSON file
+    read()
 
-Vowels_list = ["a", "e", "i", "o", "u"]
-consonants_list = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z']
+    # Write the complete UserData to the JSON file
+    with open(file_path, 'w') as file:
+        json.dump(UserData, file , indent = 1)
 
-Word = input("Enter word:")
-vowel_counter(Word)
-
-# somethings you know 
+# main core
 
