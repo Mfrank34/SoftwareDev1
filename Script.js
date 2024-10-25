@@ -4,43 +4,43 @@
 
  // learder board - mike 
 
- // goes and fetches the data from player data
+let filePath = "PlayerData.json"
+let PlayerData = {}
 
  function sort(a, b) {
     return b.score - a.score; // Sorts in descending order
 }
 
-function GetUserData(UserData, filePath) {
+function FetchPlayerData(PlayerData, filePath) {
     /**
-     * Reads data from a JSON file and appends it to UserData
+     * Reads data from a JSON file and appends it to PlayerData
      */
     try {
         const fileContent = fs.readFileSync(filePath, 'utf-8');
         const data = JSON.parse(fileContent);
         
         // Merge and sort data by score in descending order
-        UserData.push(...data);
-        UserData.sort(sort);
+        PlayerData.push(...data);
+        PlayerData.sort(sort);
+    // error checking just incase it breaks you know
     } catch (error) {
         if (error instanceof SyntaxError) {
-            console.log('No valid UserData within file');
+            console.log('No valid PlayerData within file');
         } else {
             console.error(error);
         }
     }
 };
 
+function UpdatesPlaterData(PlayerData, filePath) {
+    // Updates the user data
+    FetchPlayerData(PlayerData, filePath);
+    // Write updated PlayerData to JSON file
+    fs.writeFileSync(filePath, JSON.stringify(PlayerData, null, 2));
+}
 
-
-
-s
- function Update_LeaderBoard() {
-    try{
-        
-    }
-    catch(err) {
-
-    }
+function Update_LeaderBoard() {
+    
  };
 
  // main page interations - mikr
