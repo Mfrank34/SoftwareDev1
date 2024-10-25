@@ -5,23 +5,35 @@
  // learder board - mike 
 
  // goes and fetches the data from player data
- function fetchJSONData() {
-    fetch("./PlayerData.json")
-        .then((res)=> {
-            if(!res.ok){
-                throw new Error
-                (`HTTP error! Status: ${res.status}`);
-            }
-            return res.json()
-        })
-        .then((data) =>
-            console.log(data))
-        .catch((error) =>
-            console.error("Unable to fetch data:", error))
+
+ function sort(a, b) {
+    return b.score - a.score; // Sorts in descending order
 }
 
-let leaderboard = fetchJSONData();
+function GetUserData(UserData, filePath) {
+    /**
+     * Reads data from a JSON file and appends it to UserData
+     */
+    try {
+        const fileContent = fs.readFileSync(filePath, 'utf-8');
+        const data = JSON.parse(fileContent);
+        
+        // Merge and sort data by score in descending order
+        UserData.push(...data);
+        UserData.sort(sort);
+    } catch (error) {
+        if (error instanceof SyntaxError) {
+            console.log('No valid UserData within file');
+        } else {
+            console.error(error);
+        }
+    }
+};
 
+
+
+
+s
  function Update_LeaderBoard() {
     try{
         
