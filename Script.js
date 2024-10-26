@@ -10,44 +10,44 @@ function sort(a, b) {
     return b.score - a.score; // Sorts in descending order
 }
 
-function FetchPlayerData(PlayerData, filePath) {
-    /**
-     * Reads data from a JSON file, appends it to PlayerData, and returns the modified array.
-     */
-    try {
-        const fileContent = fs.readFileSync(filePath, 'utf-8');
-        const data = JSON.parse(fileContent);
-        
-        // Merge and sort data by score in descending order
-        const updatedData = [...PlayerData, ...data];
-        updatedData.sort(sort); // Assuming each player has a 'score' property
-
-        return updatedData;
-    } catch (error) {
-        if (error instanceof SyntaxError) {
-            console.log('No valid PlayerData within file');
-        } else {
-            console.error(error);
-        }
-        return PlayerData; // Return original data if there's an error
-    }
+function fetchJSONData() {
+    fetch("./PlayerData.json")
+        .then((res)=> {
+            if(!res.ok){
+                throw new Error
+                (`HTTP error! Status: ${res.status}`);
+            }
+            return res.json()
+        })
+        .then((data) =>
+            console.log(data))
+        .catch((error) =>
+            console.error("Unable to fetch data:", error))
 }
 
-function UpdatesPlaterData(PlayerData, filePath) {
-    // Updates the user data
-    FetchPlayerData(PlayerData, filePath);
-    // Write updated PlayerData to JSON file
-    fs.writeFileSync(filePath, JSON.stringify(PlayerData, null, 2));
-}
-function Update() {
-    var filePath = "PlayerData.json"
-     return FetchPlayerData(PlayerData, filePath)
-}
-function Update_LeaderBoard() {
-    
- };
 
- // main page interations - mikr
+
+ // main page interations - mike
+
+function Submit(id) {
+    return document.getElementById(id).value;
+}
+
+// below are is an event listerner is looks for inteaction within the page
+document.addEventListener("DOMContentLoaded", function() {
+    // button for user names
+    document.getElementById("NameSubmit").onclick = function(){
+        const UserName = Submit('Name');
+        document.getElementById("currentUser").textContent = UserName // updates heading 3 on leaderboards
+        console.log(UserName)
+    };
+
+    document.getElementById("WordSubmit").onclick = function(){
+        const UserWord = Submit('InputWord');
+        console.log(UserWord);
+    };
+});
+
 
  // colour letters - both  
 
