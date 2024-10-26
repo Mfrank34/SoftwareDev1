@@ -42,10 +42,20 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log(UserName)
     };
 
+    // get word for the cansin to user and save
     document.getElementById("WordSubmit").onclick = function(){
         const UserWord = Submit('InputWord');
         console.log(UserWord);
     };
+
+    // update leaderboard
+    document.getElementById("leaderboardUpdate").onclick = function(){
+
+    };
+
+    // more if needed idk 
+
+    
 });
 
 

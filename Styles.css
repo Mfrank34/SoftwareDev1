@@ -19,46 +19,23 @@ h1, h2, h3, p {
     text-align: center;
 }
 
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
 /* Apply box-sizing to all elements to include padding and borders within element's width */
 * {
     box-sizing: border-box;
-}
-
-/* game box styling */
-.container {
-    border: 1px solid black;
-    padding: 20px;
-    width: 300px auto;
-    height: 200px;
-    margin: 20px auto; 
-    text-align: center;
-}
-
-/* input box for some alinment */
-.input_box {
-    border: 1px ;
-    padding: 20px;
-    width: 300px;
-    height: 80px;
-    margin: 20px auto; 
-    text-align: center;
-}
-
-.Error_box {
-    border: 1px ;
-    padding: 20px;
-    width: 300px auto;
-    height: 80px;
-    margin: 20px auto; 
-    text-align: center;
+    padding: 1sspx;
 }
 
 .RightColumn {
     float: left; 
     width: 65%;   
     padding: 20px; 
-    height: auto;
-    background-color: white; 
+    height: auto; 
+    border-radius: 20px;
 }
 
 .LeftColumn {
@@ -67,6 +44,7 @@ h1, h2, h3, p {
     padding: 20px; 
     height: auto; 
     background-color: lightgray;
+    border-radius: 20px;
 }
 
 /* Clearfix for row */
@@ -74,4 +52,46 @@ h1, h2, h3, p {
     content: "";
     display: table;
     clear: both; /* Clear the float for the columns */
+}
+
+/* game box styling */
+.container {
+    border: 1px solid black;
+    padding: 20px;
+    width: 300px auto;
+    height: 300px;
+    margin: 20px auto; 
+    text-align: center;
+    border-radius: 20px;
+}
+
+/* input box for some alinment */
+.box {
+    border: 1px;
+    padding: 20px;
+    width: 300px;
+    height: 80px auto;
+    margin: 20px auto; 
+    text-align: center;
+    cursor: pointer;
+}
+
+.button {
+    border: 1px;
+    padding: 20px;
+    width: 300px;
+    height: 80px;
+    margin: 12px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.smbutton {
+    border: 1px;
+    padding: 5px;
+    width: 150px ;
+    height: 40px;
+    margin: 10px;
+    border-radius: 20px;
+    cursor: pointer;
 }
