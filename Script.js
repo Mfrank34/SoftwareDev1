@@ -46,8 +46,8 @@ async function wordGen() {
 }
 
 
-//prints out the definition of word using a dictionary api
 async function wordDefinition() {
+    //prints out the definition of word using dictionary api
     let dicResult = await dictionary("https://api.dictionaryapi.dev/api/v2/entries/en/" + result[0])
     let def1 = dicResult[0].meanings[0].definitions[0].definition
     console.log(def1)
@@ -59,13 +59,9 @@ async function wordDefinition() {
     }
 }
   
-    
 
+ // user guesses and vailations cansin
 
-wordGen()
-
-
- // user vailations cansin
 
  // learder board - mike 
 const filePath = "PlayerData.json"
