@@ -91,6 +91,9 @@ function Submit(id) {
     return document.getElementById(id).value;
 }
 
+//used to track the gguesses of the user
+let numAttempts = 0;
+
 // below are is an event listerner is looks for inteaction within the page
 document.addEventListener("DOMContentLoaded", function() {
     // button for user names
@@ -101,9 +104,27 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 
     // get word for the cansin to user and save
-    document.getElementById("WordSubmit").onclick = function(){
+    document.getElementById("WordSubmit").onclick = async function(){
         const UserWord = Submit('InputWord');
         console.log(UserWord);
+        
+        //validates the input
+        const checkValid = await inputValidation(UserWord);
+        if (checkValid){
+            numAttempts++; //adds one to numAttempts
+            console.log("attempt ${numAttempts}: ${UserWord}"); //prints the users guess with the guess number
+
+            //checks the user has guessed  5 times
+            if (numAttempts >= 5){
+                document.getElementById("error").textContent = "All guesses used. The word was: ${result}";
+                
+            }
+            else{
+                wordDefinition();
+            }
+            
+
+        }
     };
 
     // update leaderboard
