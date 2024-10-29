@@ -123,7 +123,7 @@ async function inputValidation(UserWord) {
     errorElement.textContent = "";
 
     //checks if the user has entered 5 characters and only letters
-    if (UserWord !== 5 || !/^[a-zA-Z]+$/.test(UserWord)){ //allows only lower and uppecase letters from the english alphabet to be entered
+    if (UserWord.length !== 5 || !/^[a-zA-Z]+$/.test(UserWord)){ //allows only lower and uppecase letters from the english alphabet to be entered
         errorElement.textContent = "Please enter only letters from the English alphabet. No numbers or special characters."
         return false; //ensures an invalid input isn't counted as a guess
 
@@ -138,6 +138,8 @@ async function inputValidation(UserWord) {
 
     return true; //if input it valid
 }
+
+
 
  // colour letters - both  
 
