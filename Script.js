@@ -60,9 +60,6 @@ async function wordDefinition() {
 }
   
 
- // user guesses and vailations cansin
-
-
  // learder board - mike 
 const filePath = "PlayerData.json"
 const PlayerData = []
@@ -119,6 +116,28 @@ document.addEventListener("DOMContentLoaded", function() {
     
 });
 
+//input vaidation - Cansin
+async function inputValidation(UserWord) {
+    //gets the error element element from the html file and clears the previous error message
+    const errorElement = document.getElementById("error");
+    errorElement.textContent = "";
+
+    //checks if the user has entered 5 characters and only letters
+    if (UserWord !== 5 || !/^[a-zA-Z]+$/.test(UserWord)){ //allows only lower and uppecase letters from the english alphabet to be entered
+        errorElement.textContent = "Please enter only letters from the English alphabet. No numbers or special characters."
+        return false; //ensures an invalid input isn't counted as a guess
+
+    }
+
+    //checks if the user entered and actual word using the same dictionary api
+    const dicResult = await dictionary("https://api.dictionaryapi.dev/api/v2/entries/en/" + UserWord.toLowerCase())
+    if (!dicResult || dicResult.length === 0){
+        errorElement.textContent = "Please enter an actual valid word";
+        return false;//same as before in the if statement before this one
+    }
+
+    return true; //if input it valid
+}
 
  // colour letters - both  
 
