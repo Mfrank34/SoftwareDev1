@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             //checks the user has guessed  5 times
             if (numAttempts >= 5){
-                document.getElementById("error").textContent = "All guesses used. The word was: ${result}";
+                document.getElementById("error").textContent = `All guesses used. The word was: ${result}`;
                 document.getElementById("WordSubmit").disabled = true;
                 wordDefinition();
             }
@@ -148,7 +148,7 @@ async function inputValidation(UserWord) {
 
     //checks if the user has entered 5 characters and only letters
     if (UserWord.length !== 5 || !/^[a-zA-Z]+$/.test(UserWord)){ //allows only lower and uppecase letters from the english alphabet to be entered
-        errorElement.textContent = "Please enter only letters from the English alphabet. No numbers or special characters."
+        errorElement.textContent = "Please submit a 5 letter word only containing letters from the English alphabet. No numbers or special characters."
         return false; //ensures an invalid input isn't counted as a guess
 
     }
