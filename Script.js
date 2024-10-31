@@ -105,6 +105,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // get word for the cansin to user and save
     document.getElementById("WordSubmit").onclick = async function(){
+        if (numAttempts >=5){
+            document.getElementById("error").textContent = `All guesses used. The word was: ${result}`;
+            return;
+        }
+        
         const UserWord = Submit('InputWord');
         console.log(UserWord);
         
