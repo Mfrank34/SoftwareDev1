@@ -33,8 +33,9 @@ async function dictionary(dicLink) {
     return data;
 }
 
+let result = ""
 async function wordGen() {
-    let result = await wordGenAPI("https://random-word-api.herokuapp.com/word?length=5")
+    result = await wordGenAPI("https://random-word-api.herokuapp.com/word?length=5")
     //console.log(result);
 
     //Uses this word gen api if the first api fails
