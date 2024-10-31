@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             //checks the user has guessed  5 times
             if (numAttempts >= 5){
-                document.getElementById("error").textContent = `All guesses used. The word was: ${result}`;
+                document.getElementById("error").textContent = "All guesses used. The word was: ${result}";
                 document.getElementById("WordSubmit").disabled = true;
                 wordDefinition();
             }
