@@ -1,4 +1,5 @@
  // word gen cansin
+ let result = " "
  async function wordGenAPI(link) {
     const response = await fetch(link)
 
@@ -33,7 +34,6 @@ async function dictionary(dicLink) {
     return data;
 }
 
-let result = ""
 async function wordGen() {
     result = await wordGenAPI("https://random-word-api.herokuapp.com/word?length=5")
     //console.log(result);
