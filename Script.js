@@ -120,11 +120,12 @@ let numAttempts = 0;
 // below are is an event listerner is looks for inteaction within the page
 document.addEventListener("DOMContentLoaded", function() {
 
-    // button for user names
-    document.getElementById("NameSubmit").onclick = function(){
-        const UserName = Submit('Name');
-        document.getElementById("currentUser").textContent = UserName // updates heading 3 on leaderboards
-        console.log(UserName)
+    // starts // 
+    document.getElementById("GameButton").onclick = function() {
+        var numAttempts = 0;
+        console.log('number log: ${numAttemps}')
+        var result = wordGen()
+        console.log(result)
     };
 
     // get word for the cansin to user and save
@@ -153,15 +154,20 @@ document.addEventListener("DOMContentLoaded", function() {
         }}
     };
 
+            // leaderboard interations here below
+    // button for user names
+    document.getElementById("NameSubmit").onclick = function(){
+        const UserName = Submit('Name');
+        document.getElementById("currentUser").textContent = UserName // updates heading 3 on leaderboards
+        console.log(UserName)
+    };
+
     // update leaderboard
     document.getElementById("leaderboardUpdate").onclick = function(){
         console.log(fetchJSONData())
     };
 
-    // more if needed idk 
-
-    
-});
+}); // end of event listerner 
 
 
 
