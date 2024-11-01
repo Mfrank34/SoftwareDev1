@@ -46,7 +46,6 @@ async function wordGen() {
 
 }
 
-
 async function wordDefinition() {
     //prints out the definition of word using dictionary api
     let dicResult = await dictionary("https://api.dictionaryapi.dev/api/v2/entries/en/" + result[0])
@@ -115,11 +114,12 @@ function Submit(id) {
     return document.getElementById(id).value;
 }
 
-//used to track the gguesses of the user
+//used to track the guesses of the user
 let numAttempts = 0;
 
 // below are is an event listerner is looks for inteaction within the page
 document.addEventListener("DOMContentLoaded", function() {
+
     // button for user names
     document.getElementById("NameSubmit").onclick = function(){
         const UserName = Submit('Name');
@@ -148,20 +148,14 @@ document.addEventListener("DOMContentLoaded", function() {
                 document.getElementById("error").textContent = "All guesses used. The word was: ${result}";
                 document.getElementById("WordSubmit").disabled = true;
                 wordDefinition();
-            }
-            
-        else{
+            } else{
 
-        }
-            
-            
-
-        }
+        }}
     };
 
     // update leaderboard
     document.getElementById("leaderboardUpdate").onclick = function(){
-
+        console.log(fetchJSONData())
     };
 
     // more if needed idk 
@@ -174,5 +168,4 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
  // colour letters - both  
-
 
