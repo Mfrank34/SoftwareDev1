@@ -1,6 +1,7 @@
+ 
  // word gen cansin
- let result = " "
- async function wordGenAPI(link) {
+let result = " "
+async function wordGenAPI(link) {
     const response = await fetch(link)
 
     if (!response.ok) {
@@ -14,6 +15,7 @@
         return null;
     }
 
+    //console.log(`Get API | ${data}`)
     return data;
 }
 
@@ -35,20 +37,23 @@ async function dictionary(dicLink) {
 }
 
 async function wordGen() {
-    result = await wordGenAPI("https://random-word-api.herokuapp.com/word?length=5")
-    //console.log(result);
+    let word;
+
+    word = await wordGenAPI("https://random-word-api.herokuapp.com/word?length=5")
+    console.log(`first API ${word}`);
 
     //Uses this word gen api if the first api fails
-    if (!result){
-        result = await wordGenAPI("https://random-word.ryanrk.com/api/en/word/random/?length=5")
-        //console.log(result)
+    if (!word){
+        word = await wordGenAPI("https://random-word.ryanrk.com/api/en/word/random/?length=5")
+        console.log(`second Api ${word}`)
     }
-
+    return word;
 }
 
-async function wordDefinition() {
+async function wordDefinition(word) {
     //prints out the definition of word using dictionary api
-    let dicResult = await dictionary("https://api.dictionaryapi.dev/api/v2/entries/en/" + result[0])
+    console.log(word)
+    let dicResult = await dictionary("https://api.dictionaryapi.dev/api/v2/entries/en/" + word )
     let def1 = dicResult[0].meanings[0].definitions[0].definition
     console.log(def1)
 
@@ -114,19 +119,29 @@ function Submit(id) {
     return document.getElementById(id).value;
 }
 
-//used to track the guesses of the user
+function LivesUpdater(differentsBy){
+    document.getElementById(`playerCounter`).textContent = `Lives Left: ${ differentsBy - numAttempts}`
+}
+
+
+// verables setup
 let numAttempts = 0;
 
 // below are is an event listerner is looks for inteaction within the page
 document.addEventListener("DOMContentLoaded", function() {
 
     // starts // 
-    document.getElementById("GameButton").onclick = function() {
-        var numAttempts = 0;
-        console.log('number log: ${numAttemps}')
-        var result = wordGen()
-        console.log(result)
+    document.getElementById("GameButton").onclick = async function() {
+        var numAttempts = 0; // sets attemps to zero 
+        var result = await wordGen(); // generates words
+        // logs it!
+        console.log(`lives log: ${numAttempts} | Word log ${result}`);
+        LivesUpdater(5); // updates player attemps
+        
+        document.getElementById("WordSubmit").disabled = false; // re enables button after disablement!!
+        document.getElementById(`GameButton`).textContent = `Restart!`;
     };
+        
 
     // get word for the cansin to user and save
     document.getElementById("WordSubmit").onclick = async function(){
@@ -142,16 +157,18 @@ document.addEventListener("DOMContentLoaded", function() {
         const checkValid = await inputValidation(UserWord);
         if (checkValid){
             numAttempts++; //adds one to numAttempts
-            console.log("attempt ${numAttempts}: ${UserWord}"); //prints the users guess with the guess number
+            console.log(`attempt ${numAttempts}: ${UserWord}`); //prints the users guess with the guess number
 
             //checks the user has guessed  5 times
             if (numAttempts >= 5){
-                document.getElementById("error").textContent = "All guesses used. The word was: ${result}";
+                document.getElementById("error").textContent = `All guesses used. The word was: ${result}`;
                 document.getElementById("WordSubmit").disabled = true;
-                wordDefinition();
+                wordDefinition(result);
             } else{
 
         }}
+        // updates lives at the end of click
+        LivesUpdater(5); // five lives
     };
 
             // leaderboard interations here below
@@ -168,10 +185,6 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 
 }); // end of event listerner 
-
-
-
-
 
  // colour letters - both  
 
