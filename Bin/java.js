@@ -57,3 +57,28 @@ function Update() {
     var filePath = "PlayerData.json"
     console.log(FetchPlayerData([], filePath))
 }
+
+
+ // learder board - mike 
+ const filePath = "PlayerData.json"
+ const PlayerData = []
+ 
+ function sort(a, b) {
+     return b.score - a.score; // Sorts in descending order
+ };
+ 
+ function fetchJSONData() {
+     fetch("./PlayerData.json")
+         .then((res)=> {
+             if(!res.ok){
+                 throw new Error
+                 (`HTTP error! Status: ${res.status}`);
+             }
+             return res.json()
+         })
+         .then((data) =>
+             console.log(data))
+         .catch((error) =>
+             console.error("Unable to fetch data:", error))
+ };
+ 

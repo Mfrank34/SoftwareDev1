@@ -14,7 +14,6 @@
     <body> <!-- main page -->
         <h1>The Word Guesting Game</h1>
         <hr> <!-- create a line under the heading 1 -->
-
 <!-- right side of colume-->
         <div class="row">
             <div class = "RightColumn">
@@ -25,7 +24,13 @@
                 <h1 id="playerCounter" style="text-align: left;">Lives Left: ...</h1>
                 
                 <!-- output javascript for are program from summit -->
-                <div id="output" class="container"> </div>
+                <div id="output" class="container">
+                    <p id="output_1"> </p>
+                    <p id="output_2"> </p>
+                    <p id="output_3"> </p>
+                    <p id="output_4"> </p>
+                    <p id="output_5"> </p>
+                </div>
 
                 <div class="box">
                     <!-- User Input section -->
@@ -40,20 +45,7 @@
 <!-- Left side of colume -->
             <div class = "LeftColumn"> 
                 <!-- column 2 for leader board -->
-                <h2> Leader Board </h2>
-                <div class="box"> <!-- entering user name for leaderboard-->
-                    <input type="text" id = "Name" name="Name" placeholder="Enter User name">
-                    <button class="smbutton" id="NameSubmit">Submit</button>
-                </div>
-                <hr> 
-                <P>Current UserName:</P> <!-- shows current user-->
-                <h3 id="currentUser">Guest</h3>
-                <hr>
-                <button class="button" id="leaderboardUpdate" Type="button"> Update Leaderboard </button>
-                <hr>
-                <div id="leaderboard" class="..."> 
-                    <!-- michael put the leader board in here-->
-                </div> 
+                
             </div>
         </div>
 

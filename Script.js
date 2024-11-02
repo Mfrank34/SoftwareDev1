@@ -94,40 +94,20 @@ async function wordChecker(Word) {
     return false; //if input it valid
 };
 
-
- // learder board - mike 
-const filePath = "PlayerData.json"
-const PlayerData = []
-
-function sort(a, b) {
-    return b.score - a.score; // Sorts in descending order
-};
-
-function fetchJSONData() {
-    fetch("./PlayerData.json")
-        .then((res)=> {
-            if(!res.ok){
-                throw new Error
-                (`HTTP error! Status: ${res.status}`);
-            }
-            return res.json()
-        })
-        .then((data) =>
-            console.log(data))
-        .catch((error) =>
-            console.error("Unable to fetch data:", error))
-};
-
     // main page interations - mike
 
 function Submit(id) {
     return document.getElementById(id).value;
 };
 
+function findPosition(list, item) {
+    return list[item] // takes in a list and return the value in the index
+};
+
 // input 5 for keeping to positive numbers
 function LivesUpdater(differentsBy, numAttempts){ 
     // differntBy is the starting health which is 5 lives
-    document.getElementById(`playerCounter`).textContent = `Lives Left: ${ differentsBy - numAttempts}`
+    document.getElementById(`playerCounter`).textContent = `Lives Left: ${ differentsBy - numAttempts -1}`
 };
 
 
@@ -136,7 +116,8 @@ document.addEventListener("DOMContentLoaded", function() {
     // verables for game
     let numAttempts = 0;
     let result = "";
-    let EnteredAttemps = [];
+    let EnteredAttemps = ["output_0", "output_1", "output_2", "output_3", "output_4", "output_5"];
+                    //       1           2           3           4           5            6
 
     // forces player to click start
     document.getElementById("WordSubmit").disabled = true
@@ -186,24 +167,18 @@ document.addEventListener("DOMContentLoaded", function() {
                 document.getElementById("WordSubmit").disabled = true;
                 wordDefinition(result);
             };
-            numAttempts++; //adds one to numAttempts
-            console.log(`Attempt ${numAttempts}: ${UserWord}`); //prints the users guess with the guess number
-        }; 
+        };
+        numAttempts++; //adds one to numAttempts
+        console.log(`Attempt ${numAttempts}: ${UserWord}`); //prints the users guess with the guess number
+
+        // login on screen
+        let id = findPosition(EnteredAttemps, numAttempts);
+        console.log(`current list id: ${id}`);
+        document.getElementById(id).textContent = UserWord;
+        
     };
 
-            // leaderboard interations here below
-    // button for user names
-    document.getElementById("NameSubmit").onclick = function(){
-        console.log(`UserName Button clicked!`)
-        const UserName = Submit('Name');
-        document.getElementById("currentUser").textContent = `${UserName}` // updates USERNAME for leaderBoard
-    };
-    // update leaderboard
-    document.getElementById("leaderboardUpdate").onclick = function(){
-        let UserName = document.getElementById("currentUser");
-        console.log(UserName)
-    };
-
+ 
 }); // end of event listerner 
 
  // colour letters - both  

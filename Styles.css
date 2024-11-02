@@ -2,9 +2,13 @@
 
 /* General formatting for text */
 
-h1, h2, h3, p {
+h1, h2, h3 {
     text-align: left;
     color: black;
+}
+
+p {
+    text-align: center;
 }
 
 /* Footer fixed at the bottom */
