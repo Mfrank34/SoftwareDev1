@@ -56,12 +56,12 @@ async function wordDefinition(word) {
     console.log(word)
     let dicResult = await dictionary("https://api.dictionaryapi.dev/api/v2/entries/en/" + word )
     let def1 = dicResult[0].meanings[0].definitions[0].definition
-    console.log(def1)
-
+    console.log(`first definitions: ${def1}`)
+    
     // Checks if there's a second deffinition for a word and then prints that out if there is
     if (dicResult[0].meanings[0].definitions[1]){
         let def2 = dicResult[0].meanings[0].definitions[1].definition
-        console.log(def2)
+        console.log(`second definitions: ${def2}`)
     }
 };
 
@@ -78,7 +78,7 @@ async function inputValidation(UserWord) {
     }
 
     //checks if the user entered and actual word using the same dictionary api
-    const dicResult = await dictionary("https://api.dictionaryapi.dev/api/v2/entries/en/" + UserWord.toLowerCase())
+    const dicResult = await dictionary("https://api.dictionaryapi.dev/api/v2/entries/en/" + UserWord)
     if (!dicResult || dicResult.length === 0){
         errorElement.textContent = "Please enter an actual valid word";
         return false;//same as before in the if statement before this one
@@ -129,11 +129,15 @@ document.addEventListener("DOMContentLoaded", function() {
     let numAttempts = 0;
     let result = "";
     let EnteredAttemps = [];
+
+    // forces player to click start
+    document.getElementById("WordSubmit").disabled = true
     
     // starts // 
     document.getElementById("GameButton").onclick = async function() {
         numAttempts = 0; // sets attemps to zero 
         result = await wordGen(); // generates words
+        
         // logs it!
         console.log(` Start Button | lives: ${numAttempts} | Word: ${result}`);
         LivesUpdater(5, numAttempts);; // updates player attemps
@@ -147,22 +151,29 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // get word for the cansin to user and save
     document.getElementById("WordSubmit").onclick = async function(){
-        console.log(result)
+        //console.log(result)
 
         if (numAttempts >=5){
             document.getElementById("error").textContent = `All guesses used. The word was: ${result}`;
             return;
-        }
+        } 
         
-        const UserWord = Submit('InputWord');
-        console.log(UserWord);
+        const UserWord = Submit('InputWord').toLowerCase();
+        // console.log(UserWord); 
         
         //validates the input
         const checkValid = await inputValidation(UserWord);
         if (checkValid){
+            if (UserWord == result){
+                document.getElementById("playerCounter").textContent = `Winner!!`
+                numAttempts = 5
+            } else {
+                LivesUpdater(5, numAttempts)
+            };
+            
             numAttempts++; //adds one to numAttempts
-            console.log(`attempt ${numAttempts}: ${UserWord}`); //prints the users guess with the guess number
-
+            console.log(`Attempt ${numAttempts}: ${UserWord}`); //prints the users guess with the guess number
+            
             //checks the user has guessed  5 times
             if (numAttempts >= 5){
                 document.getElementById("error").textContent = `All guesses used. The word was: ${result}`;
@@ -170,8 +181,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 wordDefinition(result);
             };
         }
-        // updates lives at the end of click
-        LivesUpdater(5, numAttempts);
+        
     };
 
             // leaderboard interations here below
