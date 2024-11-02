@@ -1,7 +1,5 @@
  
  // word gen cansin
-let result = " ";
-
 async function wordGenAPI(link) {
     const response = await fetch(link)
 
@@ -178,6 +176,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // UserWord same as result = true
             if (UserWord == result){
                 document.getElementById("playerCounter").textContent = `Winner!!`
+
                 numAttempts = 5
             } else {
                 LivesUpdater(5, numAttempts)
