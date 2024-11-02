@@ -145,7 +145,6 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("GameButton").onclick = async function() {
         console.log(`Start Clicked!`)
         numAttempts = 0; // sets attemps to zero
-
     // bug when generating word...
         let check = true;
         while (check) {
@@ -155,7 +154,7 @@ document.addEventListener("DOMContentLoaded", function() {
         };
         
         // logs it!
-        console.log(` Start Button | lives: ${numAttempts} | Word: ${result}`);
+        console.log(`lives: ${numAttempts} | Word: ${result}`);
         LivesUpdater(5, numAttempts);; // updates player attemps
         
         // resets UI elements
@@ -195,14 +194,14 @@ document.addEventListener("DOMContentLoaded", function() {
             // leaderboard interations here below
     // button for user names
     document.getElementById("NameSubmit").onclick = function(){
+        console.log(`UserName Button clicked!`)
         const UserName = Submit('Name');
-        document.getElementById("currentUser").textContent = UserName // updates heading 3 on leaderboards
-        console.log(UserName)
+        document.getElementById("currentUser").textContent = `${UserName}` // updates USERNAME for leaderBoard
     };
-
     // update leaderboard
     document.getElementById("leaderboardUpdate").onclick = function(){
-        console.log(fetchJSONData())
+        let UserName = document.getElementById("currentUser");
+        console.log(UserName)
     };
 
 }); // end of event listerner 
