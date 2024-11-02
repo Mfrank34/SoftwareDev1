@@ -87,6 +87,16 @@ async function inputValidation(UserWord) {
     return true; //if input it valid
 };
 
+// bug fix
+async function wordChecker(Word) {
+    const dicResult = await dictionary("https://api.dictionaryapi.dev/api/v2/entries/en/" + Word)
+    if (!dicResult || dicResult.length === 0){
+        return true;//same as before in the if statement before this one
+    }
+    return false; //if input it valid
+};
+
+
  // learder board - mike 
 const filePath = "PlayerData.json"
 const PlayerData = []
@@ -135,8 +145,16 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // starts // 
     document.getElementById("GameButton").onclick = async function() {
-        numAttempts = 0; // sets attemps to zero 
-        result = await wordGen(); // generates words
+        console.log(`Start Clicked!`)
+        numAttempts = 0; // sets attemps to zero
+
+    // bug when generating word...
+        let check = true;
+        while (check) {
+            result = await wordGen(); // generates words
+            check = await wordChecker(result);
+            //console.log(`Word checker loop: ${result} | waiting for false:${check}`)
+        };
         
         // logs it!
         console.log(` Start Button | lives: ${numAttempts} | Word: ${result}`);
@@ -151,37 +169,28 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // get word for the cansin to user and save
     document.getElementById("WordSubmit").onclick = async function(){
-        //console.log(result)
-
-        if (numAttempts >=5){
-            document.getElementById("error").textContent = `All guesses used. The word was: ${result}`;
-            return;
-        } 
-        
+        console.log(`Submit Clicked!`)
+    //validates the input
         const UserWord = Submit('InputWord').toLowerCase();
-        // console.log(UserWord); 
-        
-        //validates the input
         const checkValid = await inputValidation(UserWord);
+    // cheeking if true
         if (checkValid){
+        // UserWord same as result = true
             if (UserWord == result){
                 document.getElementById("playerCounter").textContent = `Winner!!`
                 numAttempts = 5
             } else {
                 LivesUpdater(5, numAttempts)
             };
-            
-            numAttempts++; //adds one to numAttempts
-            console.log(`Attempt ${numAttempts}: ${UserWord}`); //prints the users guess with the guess number
-            
-            //checks the user has guessed  5 times
+        //checks the user has guessed  5 times
             if (numAttempts >= 5){
                 document.getElementById("error").textContent = `All guesses used. The word was: ${result}`;
                 document.getElementById("WordSubmit").disabled = true;
                 wordDefinition(result);
             };
-        }
-        
+            numAttempts++; //adds one to numAttempts
+            console.log(`Attempt ${numAttempts}: ${UserWord}`); //prints the users guess with the guess number
+        }; 
     };
 
             // leaderboard interations here below
