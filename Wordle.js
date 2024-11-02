@@ -53,7 +53,7 @@ async function main() {
     // Checks if there's a second deffinition for a word and then prints that out if there is
     if (dicResult[0].meanings[0].definitions[1]){
         let def2 = dicResult[0].meanings[0].definitions[1].definition
-        console.log(def2)
+        console.log(` def2`)
     }
     
     

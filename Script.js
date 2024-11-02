@@ -1,6 +1,7 @@
  
  // word gen cansin
-let result = " "
+let result = " ";
+
 async function wordGenAPI(link) {
     const response = await fetch(link)
 
@@ -48,7 +49,7 @@ async function wordGen() {
         console.log(`second Api ${word}`)
     }
     return word;
-}
+};
 
 async function wordDefinition(word) {
     //prints out the definition of word using dictionary api
@@ -62,8 +63,7 @@ async function wordDefinition(word) {
         let def2 = dicResult[0].meanings[0].definitions[1].definition
         console.log(def2)
     }
-}
-  
+};
 
 //input vaidation - Cansin
 async function inputValidation(UserWord) {
@@ -75,7 +75,6 @@ async function inputValidation(UserWord) {
     if (UserWord.length !== 5 || !/^[a-zA-Z]+$/.test(UserWord)){ //allows only lower and uppecase letters from the english alphabet to be entered
         errorElement.textContent = "Please submit a 5 letter word only containing letters from the English alphabet. No numbers or special characters."
         return false; //ensures an invalid input isn't counted as a guess
-
     }
 
     //checks if the user entered and actual word using the same dictionary api
@@ -86,7 +85,7 @@ async function inputValidation(UserWord) {
     }
 
     return true; //if input it valid
-}
+};
 
  // learder board - mike 
 const filePath = "PlayerData.json"
@@ -94,7 +93,7 @@ const PlayerData = []
 
 function sort(a, b) {
     return b.score - a.score; // Sorts in descending order
-}
+};
 
 function fetchJSONData() {
     fetch("./PlayerData.json")
@@ -109,42 +108,47 @@ function fetchJSONData() {
             console.log(data))
         .catch((error) =>
             console.error("Unable to fetch data:", error))
-}
+};
 
-
-
- // main page interations - mike
+    // main page interations - mike
 
 function Submit(id) {
     return document.getElementById(id).value;
-}
+};
 
-function LivesUpdater(differentsBy){
+// input 5 for keeping to positive numbers
+function LivesUpdater(differentsBy, numAttempts){ 
+    // differntBy is the starting health which is 5 lives
     document.getElementById(`playerCounter`).textContent = `Lives Left: ${ differentsBy - numAttempts}`
-}
+};
 
-
-// verables setup
-let numAttempts = 0;
 
 // below are is an event listerner is looks for inteaction within the page
 document.addEventListener("DOMContentLoaded", function() {
-
+    // verables for game
+    let numAttempts = 0;
+    let result = "";
+    let EnteredAttemps = [];
+    
     // starts // 
     document.getElementById("GameButton").onclick = async function() {
-        var numAttempts = 0; // sets attemps to zero 
-        var result = await wordGen(); // generates words
+        numAttempts = 0; // sets attemps to zero 
+        result = await wordGen(); // generates words
         // logs it!
-        console.log(`lives log: ${numAttempts} | Word log ${result}`);
-        LivesUpdater(5); // updates player attemps
+        console.log(` Start Button | lives: ${numAttempts} | Word: ${result}`);
+        LivesUpdater(5, numAttempts);; // updates player attemps
         
+        // resets UI elements
         document.getElementById("WordSubmit").disabled = false; // re enables button after disablement!!
         document.getElementById(`GameButton`).textContent = `Restart!`;
+        document.getElementById("error").textContent = ``;
     };
         
 
     // get word for the cansin to user and save
     document.getElementById("WordSubmit").onclick = async function(){
+        console.log(result)
+
         if (numAttempts >=5){
             document.getElementById("error").textContent = `All guesses used. The word was: ${result}`;
             return;
@@ -164,11 +168,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 document.getElementById("error").textContent = `All guesses used. The word was: ${result}`;
                 document.getElementById("WordSubmit").disabled = true;
                 wordDefinition(result);
-            } else{
-
-        }}
+            };
+        }
         // updates lives at the end of click
-        LivesUpdater(5); // five lives
+        LivesUpdater(5, numAttempts);
     };
 
             // leaderboard interations here below
