@@ -135,13 +135,11 @@ document.addEventListener("DOMContentLoaded", function() {
         while (check) {
             result = await wordGen(); // generates words
             check = await wordChecker(result);
-            //console.log(`Word checker loop: ${result} | waiting for false:${check}`)
+            console.log(`waiting for false: ${check}`)
         };
-        
         // logs it!
         console.log(`lives: ${numAttempts} | Word: ${result}`);
         LivesUpdater(numAttempts); // updates player attemps
-        
         // resets UI elements
         document.getElementById("WordSubmit").disabled = false; // re enables button after disablement!!
         document.getElementById(`GameButton`).textContent = `Restart!`;
@@ -159,31 +157,23 @@ document.addEventListener("DOMContentLoaded", function() {
         if (checkValid){ // if valid is true continue
             // game play loop 
             if (numAttempts !== 0) { // if attemps is not equal to 0 
-
                 // stage 1
                 if (UserWord == result) { // if Userword is equal to results!!
                     document.getElementById("playerCounter").textContent = `Winner!!`;
                     document.getElementById("WordSubmit").disabled = true;
                     numAttempts = 0;
-                    console.log(`User compared to Result | ${numAttempts}` ) // loging 
+                    console.log(`User compared to Result | attemps: ${numAttempts}` ) // loging 
 
                 // stage 2
                 } else if (numAttempts <= 5 ) { // 5 or lower then 5
                     numAttempts-- // removes 
                     LivesUpdater(numAttempts);
                     let id = findPosition(EnteredAttemps, numAttempts);
-
-                    // display output
-                    console.log(`current list id: ${id}`);
-                    document.getElementById(id).textContent = UserWord;
-
-                    // look here 
-
                     // compares letters in the user's guess to the target word and adds colour to them - cansin
                     colouredLetters = ""
                     for (let i = 0; i < UserWord.length; i++ ){
-                        const userLetter = UserWord[i]
-                        const targetLetter = result[i]
+                        const userLetter = UserWord[i];
+                        const targetLetter = result[i];
                         if(userLetter === targetLetter){
                             colouredLetters += `<span class = "letter green"> ${userLetter}</span>`;
                             }
@@ -197,14 +187,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
                     // display output
                     console.log(`current list id: ${id}`);
-                    document.getElementById(id).textContent = colouredLetters;
-
-                    // 
-                    console.log(`lower then 5 | ${numAttempts}`) // logging
+                    document.getElementById(id).innerHTML = colouredLetters;
+                    console.log(`lower then 5 | attemps: ${numAttempts}`) // logging
                 };
 
             // stage 3
-            } else {
+            } else { // attemps rain out 
                 document.getElementById("error").textContent = `All guesses used. The word was: ${result}`;
                 document.getElementById("WordSubmit").disabled = true;
                 wordDefinition(result);
