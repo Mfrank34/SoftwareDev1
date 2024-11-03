@@ -44,21 +44,30 @@
     </div>
     
     <script>
-        function ColourText(UserWord, result) {
-            let colouredLetters = ""; // Initialize variable to store colored letters
-            for (let i = 0; i < UserWord.length; i++) {
-                const userLetter = UserWord[i]; // Current letter from UserWord
-                const targetLetter = result[i]; // Corresponding letter from result
-                if (userLetter === targetLetter) {
-                    colouredLetters += `<div class="letter-box green">${userLetter}</div>`; // Correct position
-                } else if (result.includes(userLetter)) {
-                    colouredLetters += `<div class="letter-box yellow">${userLetter}</div>`; // Correct letter, wrong position
-                } else {
-                    colouredLetters += `<div class="letter-box grey">${userLetter}</div>`; // Incorrect letter
-                }
+        
+    function ColourText(Word, genWord) {
+        let colouredLetters = ""; // Initialize variable to store colored letters
+        for (let i = 0; i < Word.length; i++) {
+            const userLetter = Word[i]; // Current letter from UserWord
+            const targetLetter = genWord[i]; // Corresponding letter from result
+            console.log(`userLetter: ${userLetter} || TargetLetter ${targetLetter}`)
+            if (userLetter === targetLetter) {
+                // Correct position
+                colouredLetters += `<div class="letter-box green">${userLetter}</div>`;
+                console.log(colouredLetters)
+            } else if (genWord.includes(userLetter)) {
+                // Correct letter, wrong position
+                colouredLetters += `<div class="letter-box yellow">${userLetter}</div>`;
+                console.log(colouredLetters)
+            } else {
+                // Incorrect letter
+                colouredLetters += `<div class="letter-box grey">${userLetter}</div>`;
+                console.log(colouredLetters)
             }
-            return colouredLetters; // Return the colored letters
         }
+        console.log("...")
+        return colouredLetters; // Return the colored letters
+    }
 
         // Array of user guesses
         const userWords = ["tiger", "great", "trace"];

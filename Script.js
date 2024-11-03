@@ -97,21 +97,29 @@ async function wordChecker(Word) {
 
     // main page interations - mike
 
-function ColourText(UserWord, result) {
+function ColourText(Word, genWord) {
     let colouredLetters = ""; // Initialize variable to store colored letters
-    for (let i = 0; i < UserWord.length; i++) {
-        const userLetter = UserWord[i]; // Current letter from UserWord
-        const targetLetter = result[i]; // Corresponding letter from result
+    for (let i = 0; i < Word.length; i++) {
+        const userLetter = Word[i]; // Current letter from UserWord
+        const targetLetter = genWord[i]; // Corresponding letter from result
+        // console.log(`userLetter: ${userLetter} || TargetLetter ${targetLetter}`)
         if (userLetter === targetLetter) {
-            colouredLetters += `<div class="letter-box green">${userLetter}</div>`; // Correct position
-        } else if (result.includes(userLetter)) {
-            colouredLetters += `<div class="letter-box yellow">${userLetter}</div>`; // Correct letter, wrong position
+            // Correct position
+            colouredLetters += `<div class="letter-box green">${userLetter}</div>`;
+            //console.log(colouredLetters)
+        } else if (genWord.includes(userLetter)) {
+            // Correct letter, wrong position
+            colouredLetters += `<div class="letter-box yellow">${userLetter}</div>`;
+            //console.log(colouredLetters)
         } else {
-            colouredLetters += `<div class="letter-box grey">${userLetter}</div>`; // Incorrect letter
+            // Incorrect letter
+            colouredLetters += `<div class="letter-box grey">${userLetter}</div>`;
+            //console.log(colouredLetters)
         }
     }
     return colouredLetters; // Return the colored letters
-};
+}
+    
 
 function Submit(id) {
     return document.getElementById(id).value;
@@ -119,14 +127,6 @@ function Submit(id) {
 
 function findPosition(list, index) {
     return list.indexOf(index) // takes in a list and return the value in the index
-};
-
-function ClearGameBoard(){
-    document.getElementById("output_1").innerHTML = ``;
-    document.getElementById("output_2").innerHTML= ``;
-    document.getElementById("output_3").innerHTML= ``;
-    document.getElementById("output_4").innerHTML = ``;
-    document.getElementById("output_5").innerHTML = ``;
 };
 
 // input 5 for keeping to positive numbers
@@ -139,14 +139,11 @@ function LivesUpdater(numAttempts){
 // below are is an event listerner is looks for inteaction within the page
 document.addEventListener("DOMContentLoaded", function() {
     // verables for game
+    const outputContainer = document.getElementById("output");
     let numAttempts = 5;
     let result = "";
-    const userWords = [];
-    let id = ""
-    let colouredLetters = ""
-    let IDs= ["output_1", "output_2", "output_3", "output_4", "output_5"];
-                        //    1           2           3           4           5     //
-        
+    const ListOfWords = [];
+    
     // forces player to click start
     document.getElementById("WordSubmit").disabled = true
     
@@ -154,7 +151,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("GameButton").onclick = async function() {
         console.log(`Start Clicked!`)
         numAttempts = 5; // sets attemps to zero
-        userWords = []; // Michael change this NOW!!!
+        ListOfWords.length = 0; // clear the array for user inputs 
     // bug when generating word...
         let check = true;
         while (check) {
@@ -170,11 +167,9 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById(`GameButton`).textContent = `Restart!`;
         document.getElementById("error").textContent = ``;
         // reset game table 
-        ClearGameBoard()
-        // rob ik i could of used a loop but no...
+        outputContainer.innerHTML = ""; // clears the box!! its really important that we clear it!
     };
-        
-
+    
     // get word for the cansin to user and save
     document.getElementById("WordSubmit").onclick = async function(){
         //console.log(`Submit Clicked!`) bug testing
@@ -183,7 +178,9 @@ document.addEventListener("DOMContentLoaded", function() {
     // checking if word is valid then proceeds
         // stage 1
         if (checkValid){ // if valid is true continue
-            UserWord.push(userWords)
+            console.log(`LOGGING LIST OF WORDS || ${ListOfWords}`)
+            ListOfWords.push(UserWord);
+
             // game play loop 
             if (numAttempts !== 0) { // if attemps is not equal to 0 
                 // stage 1
@@ -200,12 +197,13 @@ document.addEventListener("DOMContentLoaded", function() {
                     numAttempts-- // removes 
                     LivesUpdater(numAttempts);
                     // display for words
-                    const outputContainer = document.getElementById("output");
-
+                    outputContainer.innerHTML = ""; // clears the box!! its really important that we clear it!!
                     // for loop userwords
-                    userWords.forEach(word => {
+
+                    console.log(result)
+                    ListOfWords.forEach(word => {
                         // Wrap each word's output in a div with the class "word-container"
-                        const wordHTML = `<div class="word-container">${ColourText(word, result)}</div>`;
+                        const wordHTML = `<div class="word-container">${ColourText(word, `${result}`)}</div>`;
                         outputContainer.innerHTML += wordHTML; // Append each word's output to the main container
                     });
                     // end of colored words
