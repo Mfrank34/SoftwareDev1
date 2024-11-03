@@ -159,34 +159,51 @@ document.addEventListener("DOMContentLoaded", function() {
         if (checkValid){ // if valid is true continue
             // game play loop 
             if (numAttempts !== 0) { // if attemps is not equal to 0 
+
+                // stage 1
                 if (UserWord == result) { // if Userword is equal to results!!
                     document.getElementById("playerCounter").textContent = `Winner!!`;
                     document.getElementById("WordSubmit").disabled = true;
                     numAttempts = 0;
                     console.log(`User compared to Result | ${numAttempts}` ) // loging 
+
+                // stage 2
                 } else if (numAttempts <= 5 ) { // 5 or lower then 5
                     numAttempts-- // removes 
                     LivesUpdater(numAttempts);
                     let id = findPosition(EnteredAttemps, numAttempts);
+
+                    // display output
                     console.log(`current list id: ${id}`);
                     document.getElementById(id).textContent = UserWord;
+
+                    // look here 
+
                     // compares letters in the user's guess to the target word and adds colour to them - cansin
                     colouredLetters = ""
-                        for (let i = 0; i < UserWord.length; i++ ){
-                            const userLetter = UserWord[i]
-                            const targetLetter = result[i]
-                            if(userLetter === targetLetter){
-                                colouredLetters += `<span class = "letter green"> ${userLetter}</span>`;
-                                }
-                                else if (result.includes(userLetter)){
-                                    colouredLetters += `<span class = "letter yellow"> ${userLetter}</span>`;
-                                }
-                                else{
-                                    colouredLetters += `<span class = "letter grey"> ${userLetter} </span>`;
-                                };
+                    for (let i = 0; i < UserWord.length; i++ ){
+                        const userLetter = UserWord[i]
+                        const targetLetter = result[i]
+                        if(userLetter === targetLetter){
+                            colouredLetters += `<span class = "letter green"> ${userLetter}</span>`;
+                            }
+                            else if (result.includes(userLetter)){
+                                colouredLetters += `<span class = "letter yellow"> ${userLetter}</span>`;
+                            }
+                            else{
+                                colouredLetters += `<span class = "letter grey"> ${userLetter} </span>`;
                             };
+                        };
+
+                    // display output
+                    console.log(`current list id: ${id}`);
+                    document.getElementById(id).textContent = colouredLetters;
+
+                    // 
                     console.log(`lower then 5 | ${numAttempts}`) // logging
                 };
+
+            // stage 3
             } else {
                 document.getElementById("error").textContent = `All guesses used. The word was: ${result}`;
                 document.getElementById("WordSubmit").disabled = true;
