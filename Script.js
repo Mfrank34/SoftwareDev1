@@ -148,22 +148,32 @@ document.addEventListener("DOMContentLoaded", function() {
     // get word for the cansin to user and save
     document.getElementById("WordSubmit").onclick = async function(){
         console.log(`Submit Clicked!`)
-    //validates the input
+    //validates the input - cansin
         const UserWord = Submit('InputWord').toLowerCase();
         const checkValid = await inputValidation(UserWord);
     // checking if true
         if (checkValid){
 
-            // stores the feedback for each letter so that the can be coloured
-            let letterFB = ""
+            // compares letters in the user's guess to the target word and adds colour to them - cansin
+            let colouredLetters = ""
             for (let i = 0; i < UserWord.length; i++ ){
                 const userLetter = UserWord[i]
                 const targetLetter = result[i]
 
                 if(userLetter === targetLetter){
-                    letterFB += `<span class = "green letter">${userLetter}</span>`;
+                    colouredLetters += `<span class = "letter green"> ${userLetter}</span>`;
+                }
+                else if (result.includes(userLetter)){
+                    colouredLetters += `<span class = "letter yellow"> ${userLetter}</span>`;
+                }
+                else{
+                    colouredLetters += `<span class = "letter grey"> ${userLetter} </span>`;
                 }
             }
+
+            //displaying the coloured letters
+            let id = findPosition(EnteredAttemps, numAttempts)
+            document.getElementById(id).innerHTML = colouredLetters;
 
         // UserWord same as result = true   (win Condition)
             if (UserWord == result){
@@ -192,6 +202,4 @@ document.addEventListener("DOMContentLoaded", function() {
 
  
 }); // end of event listerner 
-
- // colour letters - both  
 
