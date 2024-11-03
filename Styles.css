@@ -63,7 +63,7 @@ body {
     border: 1px solid black;
     padding: 20px;
     width: 100px auto;
-    height: 300px;
+    height: 300px auto;
     margin: 20px auto; 
     text-align: center;
     border-radius: 20px;
@@ -100,29 +100,31 @@ body {
     cursor: pointer;
 }
 
-
 /* displaying big lteters and colours for the letters in the guessed word */
-.letter{
-    display: inline-block;
-    width: 30px;
-    height: 30px;
-    margin: 2px;
-    text-align: center;
-    font-weight: bold;
-    font-size: 25px;
-}   
-
-.green{
-    background-color: green;
-    color: white;
+.word-container {
+    margin-bottom: 15px; /* Space between words */
 }
-
-.yellow{
-    background-color: yellow;
-    color: white;
+.letter-box {
+    display: inline-block; /* Display each letter in a block */
+    width: 40px; /* Width of each box */
+    height: 40px; /* Height of each box */
+    line-height: 40px; /* Center text vertically */
+    text-align: center; /* Center text horizontally */
+    margin: 5px; /* Spacing between boxes */
+    border: 2px solid #000; /* Border for the boxes */
+    border-radius: 5px; /* Rounded corners */
+    font-weight: bold; /* Bold letters */
+    font-size: 14px; /* Set font size to 14 pixels */
 }
-
-.grey{
-    background-color: grey;
-    color: white;
+.green {
+    background-color: green; /* Background color for correct letters */
+    color: white; /* Text color for visibility */
+}
+.yellow {
+    background-color: yellow; /* Background color for misplaced letters */
+    color: black; /* Text color for visibility */
+}
+.grey {
+    background-color: grey; /* Background color for incorrect letters */
+    color: white; /* Text color for visibility */
 }

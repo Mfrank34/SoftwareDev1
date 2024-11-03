@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ColourText with Multiple Words</title>
+    <style>
+        body {
+            background-color: black;
+        }
+        .word-container {
+            margin-bottom: 15px; /* Space between words */
+        }
+        .letter-box {
+            display: inline-block; /* Display each letter in a block */
+            width: 40px; /* Width of each box */
+            height: 40px; /* Height of each box */
+            line-height: 40px; /* Center text vertically */
+            text-align: center; /* Center text horizontally */
+            margin: 5px; /* Spacing between boxes */
+            border: 2px solid #000; /* Border for the boxes */
+            border-radius: 5px; /* Rounded corners */
+            font-weight: bold; /* Bold letters */
+            font-size: 14px; /* Set font size to 14 pixels */
+        }
+        .green {
+            background-color: green; /* Background color for correct letters */
+            color: white; /* Text color for visibility */
+        }
+        .yellow {
+            background-color: yellow; /* Background color for misplaced letters */
+            color: black; /* Text color for visibility */
+        }
+        .grey {
+            background-color: grey; /* Background color for incorrect letters */
+            color: white; /* Text color for visibility */
+        }
+    </style>
+</head>
+<body>
+
+    <div id="output" class="container">
+        <!-- This will hold the generated colored letters for each word -->
+    </div>
+    
+    <script>
+        function ColourText(UserWord, result) {
+            let colouredLetters = ""; // Initialize variable to store colored letters
+            for (let i = 0; i < UserWord.length; i++) {
+                const userLetter = UserWord[i]; // Current letter from UserWord
+                const targetLetter = result[i]; // Corresponding letter from result
+                if (userLetter === targetLetter) {
+                    colouredLetters += `<div class="letter-box green">${userLetter}</div>`; // Correct position
+                } else if (result.includes(userLetter)) {
+                    colouredLetters += `<div class="letter-box yellow">${userLetter}</div>`; // Correct letter, wrong position
+                } else {
+                    colouredLetters += `<div class="letter-box grey">${userLetter}</div>`; // Incorrect letter
+                }
+            }
+            return colouredLetters; // Return the colored letters
+        }
+
+        // Array of user guesses
+        const userWords = ["tiger", "great", "trace"];
+        const targetWord = "grate"; // Target word
+
+        // Display each word in the output div
+        const outputContainer = document.getElementById("output");
+
+        userWords.forEach(word => {
+            // Wrap each word's output in a div with the class "word-container"
+            const wordHTML = `<div class="word-container">${ColourText(word, targetWord)}</div>`;
+            outputContainer.innerHTML += wordHTML; // Append each word's output to the main container
+        });
+    </script>
+</body>
+</html>
+

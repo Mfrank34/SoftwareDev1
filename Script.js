@@ -97,20 +97,36 @@ async function wordChecker(Word) {
 
     // main page interations - mike
 
+function ColourText(UserWord, result) {
+    let colouredLetters = ""; // Initialize variable to store colored letters
+    for (let i = 0; i < UserWord.length; i++) {
+        const userLetter = UserWord[i]; // Current letter from UserWord
+        const targetLetter = result[i]; // Corresponding letter from result
+        if (userLetter === targetLetter) {
+            colouredLetters += `<div class="letter-box green">${userLetter}</div>`; // Correct position
+        } else if (result.includes(userLetter)) {
+            colouredLetters += `<div class="letter-box yellow">${userLetter}</div>`; // Correct letter, wrong position
+        } else {
+            colouredLetters += `<div class="letter-box grey">${userLetter}</div>`; // Incorrect letter
+        }
+    }
+    return colouredLetters; // Return the colored letters
+};
+
 function Submit(id) {
     return document.getElementById(id).value;
 };
 
-function findPosition(list, item) {
-    return list[item] // takes in a list and return the value in the index
+function findPosition(list, index) {
+    return list.indexOf(index) // takes in a list and return the value in the index
 };
 
 function ClearGameBoard(){
-    document.getElementById("output_1").textContent = ``;
-    document.getElementById("output_2").textContent = ``;
-    document.getElementById("output_3").textContent = ``;
-    document.getElementById("output_4").textContent = ``;
-    document.getElementById("output_5").textContent = ``;
+    document.getElementById("output_1").innerHTML = ``;
+    document.getElementById("output_2").innerHTML= ``;
+    document.getElementById("output_3").innerHTML= ``;
+    document.getElementById("output_4").innerHTML = ``;
+    document.getElementById("output_5").innerHTML = ``;
 };
 
 // input 5 for keeping to positive numbers
@@ -125,8 +141,10 @@ document.addEventListener("DOMContentLoaded", function() {
     // verables for game
     let numAttempts = 5;
     let result = "";
+    const userWords = [];
+    let id = ""
     let colouredLetters = ""
-    let EnteredAttemps = ["output_1", "output_2", "output_3", "output_4", "output_5"];
+    let IDs= ["output_1", "output_2", "output_3", "output_4", "output_5"];
                         //    1           2           3           4           5     //
         
     // forces player to click start
@@ -136,6 +154,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("GameButton").onclick = async function() {
         console.log(`Start Clicked!`)
         numAttempts = 5; // sets attemps to zero
+        userWords = []; // Michael change this NOW!!!
     // bug when generating word...
         let check = true;
         while (check) {
@@ -175,31 +194,20 @@ document.addEventListener("DOMContentLoaded", function() {
                     // word definition 
                     document.getElementById(`WordId`).textContent = result;
                     wordDefinition(result);
-
                 // stage 2
                 } else if (numAttempts > 0 && numAttempts <= 5 ) { // 5 or lower then 5
                     numAttempts-- // removes 
                     LivesUpdater(numAttempts);
-                    let id = findPosition(EnteredAttemps, numAttempts);
-                    // compares letters in the user's guess to the target word and adds colour to them - cansin
-                    colouredLetters = ""
-                    for (let i = 0; i < UserWord.length; i++ ){
-                        const userLetter = UserWord[i];
-                        const targetLetter = result[i];
-                        if(userLetter === targetLetter){
-                            colouredLetters += `<span class="letter green">${userLetter}</span>`;
-                            }
-                            else if (result.includes(userLetter)){
-                                colouredLetters += `<span class="letter yellow">${userLetter}</span>`;
-                            }
-                            else{
-                                colouredLetters += `<span class="letter grey">${userLetter}</span>`;
-                            };
-                        };
-                    // display output
-                    console.log(`current list id: ${id}`);
-                    document.getElementById(id).innerHTML = colouredLetters;
-                    // logging
+                    // display for words
+                    const outputContainer = document.getElementById("output");
+
+                    // for loop userwords
+                    userWords.forEach(word => {
+                        // Wrap each word's output in a div with the class "word-container"
+                        const wordHTML = `<div class="word-container">${ColourText(word, result)}</div>`;
+                        outputContainer.innerHTML += wordHTML; // Append each word's output to the main container
+                    });
+                    // end of colored words
                     console.log(`lower then 5 | attemps: ${numAttempts}`)
                 };
             // stage 3

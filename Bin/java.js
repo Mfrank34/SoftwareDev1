@@ -170,7 +170,7 @@ document.getElementById("WordSubmit").onclick = async function(){
 };
 
 
-else if (numAttempts == 0) { // ran out of lives
+if (numAttempts == 0) { // ran out of lives
     document.getElementById("error").textContent = `All guesses used. The word was: ${result}`;
     document.getElementById("WordSubmit").disabled = true;
     wordDefinition(result)
@@ -178,4 +178,33 @@ else if (numAttempts == 0) { // ran out of lives
     console.log(`no more attemps | ${numAttempts}`)
 } else {
     console.log(`end of "if" statement! | ${numAttempts}`)
-};
+}; 
+
+function ColourText(){
+    colouredLetters = ""
+    for (let i = 0; i < UserWord.length; i++ ){
+    const userLetter = UserWord[i];
+    const targetLetter = result[i];
+    if(userLetter === targetLetter){
+        colouredLetters += `<span class="letter green">${userLetter}</span>`;
+        } else if (result.includes(userLetter)){
+            colouredLetters += `<span class="letter yellow">${userLetter}</span>`;
+            } else{
+                colouredLetters += `<span class="letter grey">${userLetter}</span>`;
+            };
+    };
+
+
+    for (let i = 0; i < UserWord.length; i++ ){
+        const userLetter = UserWord[i];
+        const targetLetter = result[i];
+        if(userLetter === targetLetter){
+            colouredLetters += `<span class="letter green">${userLetter}</span>`;
+            }
+            else if (result.includes(userLetter)){
+                colouredLetters += `<span class="letter yellow">${userLetter}</span>`;
+            }
+            else{
+                colouredLetters += `<span class="letter grey">${userLetter}</span>`;
+            };
+        };
