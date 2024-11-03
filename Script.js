@@ -183,6 +183,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // checking if word is valid then proceeds
         // stage 1
         if (checkValid){ // if valid is true continue
+            UserWord.push(userWords)
             // game play loop 
             if (numAttempts !== 0) { // if attemps is not equal to 0 
                 // stage 1
