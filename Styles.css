@@ -99,3 +99,29 @@ body {
     border-radius: 20px;
     cursor: pointer;
 }
+
+
+/* displaying big lteters and colours for the letters in the guessed word */
+.letter{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: 2px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.green{
+    background-color: green;
+    color: white;
+}
+
+.yellow{
+    background-color: yellow;
+    color: white;
+}
+
+.grey{
+    background-color: grey;
+    color: white;
+}

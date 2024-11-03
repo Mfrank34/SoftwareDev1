@@ -151,9 +151,21 @@ document.addEventListener("DOMContentLoaded", function() {
     //validates the input
         const UserWord = Submit('InputWord').toLowerCase();
         const checkValid = await inputValidation(UserWord);
-    // cheeking if true
+    // checking if true
         if (checkValid){
-        // UserWord same as result = true
+
+            // stores the feedback for each letter so that the can be coloured
+            let letterFB = ""
+            for (let i = 0; i < UserWord.length; i++ ){
+                const userLetter = UserWord[i]
+                const targetLetter = result[i]
+
+                if(userLetter === targetLetter){
+                    letterFB += `<span class = "green letter">${userLetter}</span>`;
+                }
+            }
+
+        // UserWord same as result = true   (win Condition)
             if (UserWord == result){
                 document.getElementById("playerCounter").textContent = `Winner!!`
                 // disables loop
