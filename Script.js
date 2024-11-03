@@ -62,7 +62,7 @@ async function wordDefinition(word) {
         console.log(`second definitions: ${def2}`)
     }
 
-    return def1, def2
+    return def1
 };
 
 //input vaidation - Cansin
@@ -106,6 +106,8 @@ function findPosition(list, item) {
     return list[item] // takes in a list and return the value in the index
 };
 
+function 
+
 // input 5 for keeping to positive numbers
 function LivesUpdater(numAttempts){ 
     // differntBy is the starting health which is 5 lives
@@ -117,12 +119,12 @@ function LivesUpdater(numAttempts){
 document.addEventListener("DOMContentLoaded", function() {
     // verables for game
     let numAttempts = 5;
+    let def1 = "";
     let result = "";
     let colouredLetters = ""
     let EnteredAttemps = ["output_1", "output_2", "output_3", "output_4", "output_5"];
                     //       1           2           3           4           5
     
-
     // forces player to click start
     document.getElementById("WordSubmit").disabled = true
     
@@ -144,6 +146,13 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("WordSubmit").disabled = false; // re enables button after disablement!!
         document.getElementById(`GameButton`).textContent = `Restart!`;
         document.getElementById("error").textContent = ``;
+        // reset game table 
+        document.getElementById("output_1").textContent = ``;
+        document.getElementById("output_2").textContent = ``;
+        document.getElementById("output_3").textContent = ``;
+        document.getElementById("output_4").textContent = ``;
+        document.getElementById("output_5").textContent = ``;
+        // rob ik i could of used a loop but no...
     };
         
 
@@ -164,8 +173,11 @@ document.addEventListener("DOMContentLoaded", function() {
                     numAttempts = 0;
                     console.log(`User compared to Result | attemps: ${numAttempts}` ) // loging 
 
+                    // word definition 
+                    def1 && def2 == wordDefinition(result);
+
                 // stage 2
-                } else if (numAttempts <= 5 ) { // 5 or lower then 5
+                } else if (numAttempts > 1 && numAttempts <= 5 ) { // 5 or lower then 5
                     numAttempts-- // removes 
                     LivesUpdater(numAttempts);
                     let id = findPosition(EnteredAttemps, numAttempts);
@@ -184,15 +196,14 @@ document.addEventListener("DOMContentLoaded", function() {
                                 colouredLetters += `<span class = "letter grey"> ${userLetter} </span>`;
                             };
                         };
-
                     // display output
                     console.log(`current list id: ${id}`);
                     document.getElementById(id).innerHTML = colouredLetters;
-                    console.log(`lower then 5 | attemps: ${numAttempts}`) // logging
+                    // logging
+                    console.log(`lower then 5 | attemps: ${numAttempts}`)
                 };
-
             // stage 3
-            } else { // attemps rain out 
+            } else if (numAttempts == 0) { // attemps rain out 
                 document.getElementById("error").textContent = `All guesses used. The word was: ${result}`;
                 document.getElementById("WordSubmit").disabled = true;
                 wordDefinition(result);
