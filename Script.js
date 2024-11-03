@@ -151,7 +151,10 @@ document.addEventListener("DOMContentLoaded", function() {
     //validates the input
         const UserWord = Submit('InputWord').toLowerCase();
         const checkValid = await inputValidation(UserWord);
-    // checking if true
+        if (!checkValid){
+            return;
+        }
+    // checking if word is valid then proceeds
         if (checkValid){
 
             // compares letters in the user's guess to the target word and adds colour to them - cansin
