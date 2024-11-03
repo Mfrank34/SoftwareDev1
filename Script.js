@@ -118,8 +118,10 @@ document.addEventListener("DOMContentLoaded", function() {
     // verables for game
     let numAttempts = 5;
     let result = "";
+    let colouredLetters = ""
     let EnteredAttemps = ["output_1", "output_2", "output_3", "output_4", "output_5"];
                     //       1           2           3           4           5
+    
 
     // forces player to click start
     document.getElementById("WordSubmit").disabled = true
@@ -153,20 +155,9 @@ document.addEventListener("DOMContentLoaded", function() {
         const UserWord = Submit('InputWord').toLowerCase();
         const checkValid = await inputValidation(UserWord);
     // checking if word is valid then proceeds
-        if (checkValid){
-
-
-            //displaying the coloured letters
-            let id = findPosition(EnteredAttemps, numAttempts)
-            document.getElementById(id).innerHTML = colouredLetters;
-
-        // UserWord same as result = true   (win Condition)
-            if (UserWord == result){
-                document.getElementById("playerCounter").textContent = `Winner!!`
-                // disables loop
-                numAttempts = 5
         // stage 1
         if (checkValid){ // if valid is true continue
+            // game play loop 
             if (numAttempts !== 0) { // if attemps is not equal to 0 
                 if (UserWord == result) { // if Userword is equal to results!!
                     document.getElementById("playerCounter").textContent = `Winner!!`;
@@ -179,6 +170,21 @@ document.addEventListener("DOMContentLoaded", function() {
                     let id = findPosition(EnteredAttemps, numAttempts);
                     console.log(`current list id: ${id}`);
                     document.getElementById(id).textContent = UserWord;
+                    // compares letters in the user's guess to the target word and adds colour to them - cansin
+                    colouredLetters = ""
+                        for (let i = 0; i < UserWord.length; i++ ){
+                            const userLetter = UserWord[i]
+                            const targetLetter = result[i]
+                            if(userLetter === targetLetter){
+                                colouredLetters += `<span class = "letter green"> ${userLetter}</span>`;
+                                }
+                                else if (result.includes(userLetter)){
+                                    colouredLetters += `<span class = "letter yellow"> ${userLetter}</span>`;
+                                }
+                                else{
+                                    colouredLetters += `<span class = "letter grey"> ${userLetter} </span>`;
+                                };
+                            };
                     console.log(`lower then 5 | ${numAttempts}`) // logging
                 };
             } else {
@@ -186,40 +192,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 document.getElementById("WordSubmit").disabled = true;
                 wordDefinition(result);
             };
-
-            // compares letters in the user's guess to the target word and adds colour to them - cansin
-            let colouredLetters = ""
-            for (let i = 0; i < UserWord.length; i++ ){
-                const userLetter = UserWord[i]
-                const targetLetter = result[i]
-
-                if(userLetter === targetLetter){
-                    colouredLetters += `<span class = "letter green"> ${userLetter}</span>`;
-                }
-                else if (result.includes(userLetter)){
-                    colouredLetters += `<span class = "letter yellow"> ${userLetter}</span>`;
-                }
-                else{
-                    colouredLetters += `<span class = "letter grey"> ${userLetter} </span>`;
-                }
-            }
-
-        };
-        numAttempts++; //adds one to numAttempts
-        console.log(`Attempt ${numAttempts}: ${UserWord}`); //prints the users guess with the guess number
-
-        // login on screen
-        let id = findPosition(EnteredAttemps, numAttempts);
-        console.log(`current list id: ${id}`);
-        document.getElementById(id).textContent = UserWord;
-        
-    };
-
-                wordDefinition(result)
-                console.log(`no more attemps | ${numAttempts}`) // logging
-            };
         };
     };
- 
 }); // end of event listerner 
 
