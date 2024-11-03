@@ -187,13 +187,13 @@ document.addEventListener("DOMContentLoaded", function() {
                         const userLetter = UserWord[i];
                         const targetLetter = result[i];
                         if(userLetter === targetLetter){
-                            colouredLetters += `<span class = "letter green"> ${userLetter}</span>`;
+                            colouredLetters += `<span class="letter green">${userLetter}</span>`;
                             }
                             else if (result.includes(userLetter)){
-                                colouredLetters += `<span class = "letter yellow"> ${userLetter}</span>`;
+                                colouredLetters += `<span class="letter yellow">${userLetter}</span>`;
                             }
                             else{
-                                colouredLetters += `<span class = "letter grey"> ${userLetter} </span>`;
+                                colouredLetters += `<span class="letter grey">${userLetter}</span>`;
                             };
                         };
                     // display output
