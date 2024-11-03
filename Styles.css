@@ -104,12 +104,12 @@ body {
 /* displaying big lteters and colours for the letters in the guessed word */
 .letter{
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     margin: 2px;
     text-align: center;
     font-weight: bold;
-}
+}   
 
 .green{
     background-color: green;
