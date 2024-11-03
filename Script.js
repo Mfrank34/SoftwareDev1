@@ -61,6 +61,8 @@ async function wordDefinition(word) {
         let def2 = dicResult[0].meanings[0].definitions[1].definition
         console.log(`second definitions: ${def2}`)
     }
+
+    return def1, def2
 };
 
 //input vaidation - Cansin
@@ -105,19 +107,19 @@ function findPosition(list, item) {
 };
 
 // input 5 for keeping to positive numbers
-function LivesUpdater(differentsBy, numAttempts){ 
+function LivesUpdater(numAttempts){ 
     // differntBy is the starting health which is 5 lives
-    document.getElementById(`playerCounter`).textContent = `Lives Left: ${ differentsBy - numAttempts -1}`
+    document.getElementById(`playerCounter`).textContent = `Lives Left: ${numAttempts}`
 };
 
 
 // below are is an event listerner is looks for inteaction within the page
 document.addEventListener("DOMContentLoaded", function() {
     // verables for game
-    let numAttempts = 0;
+    let numAttempts = 5;
     let result = "";
-    let EnteredAttemps = ["output_0", "output_1", "output_2", "output_3", "output_4", "output_5"];
-                    //       1           2           3           4           5            6
+    let EnteredAttemps = ["output_1", "output_2", "output_3", "output_4", "output_5"];
+                    //       1           2           3           4           5
 
     // forces player to click start
     document.getElementById("WordSubmit").disabled = true
@@ -125,7 +127,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // starts // 
     document.getElementById("GameButton").onclick = async function() {
         console.log(`Start Clicked!`)
-        numAttempts = 0; // sets attemps to zero
+        numAttempts = 5; // sets attemps to zero
     // bug when generating word...
         let check = true;
         while (check) {
@@ -136,7 +138,7 @@ document.addEventListener("DOMContentLoaded", function() {
         
         // logs it!
         console.log(`lives: ${numAttempts} | Word: ${result}`);
-        LivesUpdater(5, numAttempts);; // updates player attemps
+        LivesUpdater(numAttempts); // updates player attemps
         
         // resets UI elements
         document.getElementById("WordSubmit").disabled = false; // re enables button after disablement!!
@@ -147,37 +149,33 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // get word for the cansin to user and save
     document.getElementById("WordSubmit").onclick = async function(){
-        console.log(`Submit Clicked!`)
-    //validates the input
+        //console.log(`Submit Clicked!`) bug testing
         const UserWord = Submit('InputWord').toLowerCase();
         const checkValid = await inputValidation(UserWord);
-    // cheeking if true
-        if (checkValid){
-        // UserWord same as result = true
-            if (UserWord == result){
-                document.getElementById("playerCounter").textContent = `Winner!!`
-                // disables loop
-                numAttempts = 5
+        // stage 1
+        if (checkValid){ // if valid is true continue
+            if (numAttempts !== 0) { // if attemps is not equal to 0 
+                if (UserWord == result) { // if Userword is equal to results!!
+                    document.getElementById("playerCounter").textContent = `Winner!!`;
+                    document.getElementById("WordSubmit").disabled = true;
+                    numAttempts = 0;
+                    console.log(`User compared to Result | ${numAttempts}` ) // loging 
+                } else if (numAttempts <= 5 ) { // 5 or lower then 5
+                    numAttempts-- // removes 
+                    LivesUpdater(numAttempts);
+                    let id = findPosition(EnteredAttemps, numAttempts);
+                    console.log(`current list id: ${id}`);
+                    document.getElementById(id).textContent = UserWord;
+                    console.log(`lower then 5 | ${numAttempts}`) // logging
+                };
             } else {
-                LivesUpdater(5, numAttempts)
-            };
-        //checks the user has guessed  5 times
-            if (numAttempts >= 5){
                 document.getElementById("error").textContent = `All guesses used. The word was: ${result}`;
                 document.getElementById("WordSubmit").disabled = true;
-                wordDefinition(result);
+                wordDefinition(result)
+                console.log(`no more attemps | ${numAttempts}`) // logging
             };
         };
-        numAttempts++; //adds one to numAttempts
-        console.log(`Attempt ${numAttempts}: ${UserWord}`); //prints the users guess with the guess number
-
-        // login on screen
-        let id = findPosition(EnteredAttemps, numAttempts);
-        console.log(`current list id: ${id}`);
-        document.getElementById(id).textContent = UserWord;
-        
     };
-
  
 }); // end of event listerner 
 
