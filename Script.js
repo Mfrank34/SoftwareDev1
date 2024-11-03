@@ -152,6 +152,19 @@ document.addEventListener("DOMContentLoaded", function() {
         //console.log(`Submit Clicked!`) bug testing
         const UserWord = Submit('InputWord').toLowerCase();
         const checkValid = await inputValidation(UserWord);
+    // checking if word is valid then proceeds
+        if (checkValid){
+
+
+            //displaying the coloured letters
+            let id = findPosition(EnteredAttemps, numAttempts)
+            document.getElementById(id).innerHTML = colouredLetters;
+
+        // UserWord same as result = true   (win Condition)
+            if (UserWord == result){
+                document.getElementById("playerCounter").textContent = `Winner!!`
+                // disables loop
+                numAttempts = 5
         // stage 1
         if (checkValid){ // if valid is true continue
             if (numAttempts !== 0) { // if attemps is not equal to 0 
@@ -171,6 +184,37 @@ document.addEventListener("DOMContentLoaded", function() {
             } else {
                 document.getElementById("error").textContent = `All guesses used. The word was: ${result}`;
                 document.getElementById("WordSubmit").disabled = true;
+                wordDefinition(result);
+            };
+
+            // compares letters in the user's guess to the target word and adds colour to them - cansin
+            let colouredLetters = ""
+            for (let i = 0; i < UserWord.length; i++ ){
+                const userLetter = UserWord[i]
+                const targetLetter = result[i]
+
+                if(userLetter === targetLetter){
+                    colouredLetters += `<span class = "letter green"> ${userLetter}</span>`;
+                }
+                else if (result.includes(userLetter)){
+                    colouredLetters += `<span class = "letter yellow"> ${userLetter}</span>`;
+                }
+                else{
+                    colouredLetters += `<span class = "letter grey"> ${userLetter} </span>`;
+                }
+            }
+
+        };
+        numAttempts++; //adds one to numAttempts
+        console.log(`Attempt ${numAttempts}: ${UserWord}`); //prints the users guess with the guess number
+
+        // login on screen
+        let id = findPosition(EnteredAttemps, numAttempts);
+        console.log(`current list id: ${id}`);
+        document.getElementById(id).textContent = UserWord;
+        
+    };
+
                 wordDefinition(result)
                 console.log(`no more attemps | ${numAttempts}`) // logging
             };
@@ -178,6 +222,4 @@ document.addEventListener("DOMContentLoaded", function() {
     };
  
 }); // end of event listerner 
-
- // colour letters - both  
 
