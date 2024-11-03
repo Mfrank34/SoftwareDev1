@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // get word for the cansin to user and save
     document.getElementById("WordSubmit").onclick = async function(){
         console.log(`Submit Clicked!`)
-    //validates the input - cansin
+    //validates the input
         const UserWord = Submit('InputWord').toLowerCase();
         const checkValid = await inputValidation(UserWord);
     // checking if true
