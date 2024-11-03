@@ -105,8 +105,12 @@ function findPosition(list, item) {
     return list[item] // takes in a list and return the value in the index
 };
 
-function deffinitionUpdater(){
-
+function ClearGameBoard(){
+    document.getElementById("output_1").textContent = ``;
+    document.getElementById("output_2").textContent = ``;
+    document.getElementById("output_3").textContent = ``;
+    document.getElementById("output_4").textContent = ``;
+    document.getElementById("output_5").textContent = ``;
 };
 
 // input 5 for keeping to positive numbers
@@ -147,11 +151,7 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById(`GameButton`).textContent = `Restart!`;
         document.getElementById("error").textContent = ``;
         // reset game table 
-        document.getElementById("output_1").textContent = ``;
-        document.getElementById("output_2").textContent = ``;
-        document.getElementById("output_3").textContent = ``;
-        document.getElementById("output_4").textContent = ``;
-        document.getElementById("output_5").textContent = ``;
+        ClearGameBoard()
         // rob ik i could of used a loop but no...
     };
         
